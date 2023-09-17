@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes Cadastrados</title>
+</head>
+<body>
+<h1>Clientes Cadastrados</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>CPF</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.cpf}"></td>
+        <td th:text="${cliente.nome}"></td>
+        <td th:text="${cliente.email}"></td>
+        <td th:text="${cliente.telefone}"></td>
+        <td>
+                <a th:href="@{/clientes/editar(id=${cliente.id})}">Editar</a>
+        </td>
+        <td>
+        <form method="post" th:action="@{/clientes/excluir(id=${cliente.id})}">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Excluir</button>
+        </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

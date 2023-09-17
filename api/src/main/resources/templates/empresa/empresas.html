@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Empresas Cadastradas</title>
+</head>
+<body>
+<h1>Empresas Cadastradas</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>CNPJ</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Ações</th> <!-- Adicionando uma coluna para ações -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="empresa : ${empresas}">
+        <td th:text="${empresa.cnpj}"></td>
+        <td th:text="${empresa.nome}"></td>
+        <td th:text="${empresa.email}"></td>
+        <td th:text="${empresa.telefone}"></td>
+        <td>
+            <a th:href="@{/empresas/editar(id=${empresa.id})}">Editar</a>
+        </td>
+        <td>
+            <form method="post" th:action="@{/empresas/excluir(id=${empresa.id})}">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
